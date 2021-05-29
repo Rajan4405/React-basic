@@ -1,5 +1,5 @@
 import React from 'react';
-import './Person.css';
+import classes from './Person.css';
 
 const Person = (props) => {
   const style = {
@@ -8,7 +8,7 @@ const Person = (props) => {
     },
   };
   return (
-    <div className="Person" style={style}>
+    <div className={classes.Person} style={style}>
       <p onClick={props.click}>
         Hi, I am {props.name}, I am {props.age} years old.!!
       </p>
