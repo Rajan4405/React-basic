@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Component/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
     persons: [
-      { id: '12swa', name: 'Rajan', age: 28 },
-      { id: '13sds', name: 'Santosh', age: 29 },
+      { id: '12swwa', name: 'Rajan', age: 28 },
+      { id: '13sdas', name: 'Santosh', age: 29 },
       { id: '14abs', name: 'Hari', age: 26 },
+      { id: '15adbs', name: 'Mehul', age: 20 },
+      { id: '16afbs', name: 'Aliz', age: 23 },
+      { id: '17arbs', name: 'Atal', age: 22 },
     ],
     otherState: 'some other value',
     showPersons: false,
@@ -45,46 +48,28 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <ErrorBoundary key={person.id}>
-                <Person
-                  click={() => this.deletePersonHandler(index)}
-                  name={person.name}
-                  age={person.age}
-                  changed={(event) => this.nameChangedHandler(event, person.id)}
-                />
-              </ErrorBoundary>
-            );
-          })}
-        </div>
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler}
+        />
       );
-      btnClass = classes.Red;
     }
 
-    const assignClasses = [];
-    if (this.state.persons <= 2) {
-      assignClasses.push(classes.red);
-    }
-    if (this.state.persons <= 1) {
-      assignClasses.push(classes.bold);
-    }
     return (
       <div className={classes.App}>
-        <h1>Hi, I'm a React App</h1>
-        <p className={assignClasses.join(' ')}>This is really working!</p>
-        <button className={btnClass} onClick={this.togglePersonsHandler}>
-          Toggle Persons
-        </button>
+        <Cockpit
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler}
+        />
         {persons}
       </div>
     );
-    // // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
+    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
