@@ -7,16 +7,16 @@ const Cockpit = (props) => {
     btnClass = classes.Red;
   }
 
-  if (props.persons <= 2) {
+  if (props.persons < 3) {
     assignClasses.push(classes.red);
   }
 
-  if (props.persons <= 1) {
+  if (props.persons < 2) {
     assignClasses.push(classes.bold);
   }
   return (
     <div className={classes.Cockpit}>
-      <h1>Hi, I'm a React App</h1>
+      <h1>{props.title}</h1>
       <p className={assignClasses.join(' ')}>This is really working!</p>
       <button className={btnClass} onClick={props.clicked}>
         Toggle Persons
